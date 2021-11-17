@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Click Here To Open</title>
+    <style>
+   table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 8px;
+	text-align: left;
+	border-bottom: 1px solid rgb(23, 31, 10);
+}
+
+tr:hover {
+	background-color: #31bd5b;
+}
+</style>
+</head>
+<body>
+	<h10>
+    	GROCERY LISTS
+    </h10>
+    <input type='button' onclick='tableFromJson()' 
+    	value='Click Here To Open' />
+        
+    <p id='showData'></p>
+    
+    <p id='msg'></p>
+</body>
+
+<script>
+	// scroll down for ES10 features. 
+
+	// using regular methods.
+
+    function tableFromJson() {
+		// the json data. (you can change the values for output.)
+        var myLists = [
+            {'SI NO': '1', 'Item Name':'Rice', 'Quantity':'10',
+            'Unit': 'Kg', 'Department': 'Grains','Notes':'Pavizham'
+            },
+            {'SI NO': '2', 'Item Name':'Wheat', 'Quantity':'5',
+            'Unit': 'Kg', 'Department': 'Flours','Notes':'Ashirvad'
+            },
+             {'SI NO': '3', 'Item Name':'Oil', 'Quantity':'3',
+            'Unit': 'Kg', 'Department': 'Oil','Notes':'Sunflower'
+            },
+             {'SI NO': '4', 'Item Name':'Milkpowder', 'Quantity':'2',
+            'Unit': 'Kg', 'Department': 'Dairy Products','Notes':'Everyday'
+            },
+            {'SI NO': '5', 'Item Name':'Onion', 'Quantity':'4',
+            'Unit': 'Kg', 'Department': 'Vegetables','Notes':'Packet'
+            },
+             {'SI NO': '6', 'Item Name':'Potato', 'Quantity':'2',
+            'Unit': 'Kg', 'Department': 'Vegetables','Notes':'Any'
+            },
+             {'SI NO': '7', 'Item Name':'Greenchilly', 'Quantity':'750',
+            'Unit': 'gm', 'Department': 'Vegetables','Notes':'Any'
+            },
+            {'SI NO': '8', 'Item Name':'Ginger', 'Quantity':'500',
+            'Unit': 'gm', 'Department': 'Vegetables','Notes':'Any'
+            },
+             {'SI NO': '9', 'Item Name':'Carrot', 'Quantity':'2',
+            'Unit': 'Kg', 'Department': 'Vegetables','Notes':'Orange' 
+            },
+             {'SI NO': '10', 'Item Name':'Apple', 'Quantity':'1',
+            'Unit': 'Kg', 'Department': 'Fruits','Notes':'Green'
+            }
+             ]
+
+        // Extract value from table header. 
+        // ('SI NO', 'Item Name', 'Quantity','Unit','Department'and 'Notes')
+        var col = [];
+        for (var i = 0; i <  myLists.length; i++) {
+            for (var key in  myLists[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        // Create a table.
+        var table = document.createElement("table");
+
+        // Create table header row using the extracted headers above.
+        var tr = table.insertRow(-1);                   // table row.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // table header.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // add json data to the table as rows.
+        for (var i = 0; i <  myLists.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML =  myLists[i][col[j]];
+            }
+        }
+
+        // Now, add the newly created table with json data, to a container.
+        var divShowData = document.getElementById('showData');
+        divShowData.innerHTML = "";
+        divShowData.appendChild(table);
+        
+        document.getElementById('msg').innerHTML ;
+    }
+    
+</script>
+</html>
